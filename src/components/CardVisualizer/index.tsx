@@ -338,6 +338,20 @@ export default forwardRef(function CardVisualizer(_, ref) {
 					<div
 						className="absolute"
 						style={{
+							color: '#000000',
+							fontFamily: template === 'eorzean' ? 'Eorzean' : 'Myriad',
+							fontSize: `${computeSize(15)}pt`,
+							top: computeSize(1072),
+							left: computeSize(72),
+							width: computeSize(600),
+							lineHeight: `${computeSize(21)}pt`,
+						}}>
+						{description}
+					</div>
+
+					<div
+						className="absolute"
+						style={{
 							color: '#EDE1C5',
 							fontFamily: template === 'eorzean' ? 'Eorzean' : 'Myriad',
 							fontSize: `${computeSize(15)}pt`,
