@@ -1,7 +1,7 @@
 import { Card, CardBody, Input, Slider, Textarea } from '@nextui-org/react';
 import { ChangeEvent } from 'react';
 import CardBuilder, { DCC } from '../../tools/cardBuilder.ts';
-import RadioList, { RadioListItem } from '../../assets/atoms/RadioList';
+import RadioList, { RadioListItem } from '../../atoms/RadioList';
 import { getRarityName, getTemplateName, getTypeName } from '../../tools/text.ts';
 
 const TYPES = [
