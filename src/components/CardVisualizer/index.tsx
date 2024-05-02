@@ -340,7 +340,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 						style={{
 							color: '#EDE1C5',
 							fontFamily: template === 'eorzean' ? 'Eorzean' : 'Myriad',
-							fontSize: `${computeSize(17)}pt`,
+							fontSize: `${computeSize(15)}pt`,
 							top: computeSize(1070),
 							left: computeSize(70),
 							width: computeSize(600),
