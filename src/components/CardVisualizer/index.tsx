@@ -317,8 +317,8 @@ export default forwardRef(function CardVisualizer(_, ref) {
 							color: '#000000',
 							fontFamily: template === 'eorzean' ? 'Eorzean' : 'Trajan',
 							fontSize: `${computeSize(34)}pt`,
-							top: computeSize(997),
-							left: computeSize(83),
+							top: computeSize(996),
+							left: computeSize(82),
 						}}>
 						{title}
 					</div>
