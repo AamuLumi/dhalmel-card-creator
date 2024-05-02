@@ -1,6 +1,14 @@
 import { ChangeEvent, useCallback, useRef } from 'react';
-import { Button, Card, CardBody, CardHeader, NextUIProvider } from '@nextui-org/react';
-import { VscCloseAll, VscExport, VscFile, VscSave } from 'react-icons/vsc';
+import {
+	Button,
+	Card,
+	CardBody,
+	CardFooter,
+	CardHeader,
+	Link,
+	NextUIProvider,
+} from '@nextui-org/react';
+import { VscCloseAll, VscExport, VscFile, VscGithub, VscSave } from 'react-icons/vsc';
 
 import './App.css';
 import CardVisualizer from './components/CardVisualizer';
@@ -28,6 +36,7 @@ function readFile(file: File) {
 }
 
 function App() {
+	const title = CardBuilder.use('title');
 	const visualizerRef = useRef(null);
 	const inputLoadFileRef = useRef<HTMLInputElement>(null);
 
@@ -59,10 +68,10 @@ function App() {
 
 		const anchor = document.createElement('a');
 		anchor.href = URL.createObjectURL(f);
-		anchor.download = `save.dcf`;
+		anchor.download = `${title}.dcf`;
 		anchor.click();
 		anchor.remove();
-	}, []);
+	}, [title]);
 
 	const openFileExplorer = useCallback(() => {
 		if (inputLoadFileRef.current) {
@@ -117,6 +126,18 @@ function App() {
 									Réinitialiser
 								</Button>
 							</CardBody>
+							<CardFooter>
+								<Button
+									isExternal
+									fullWidth={true}
+									variant="ghost"
+									startContent={<VscGithub />}
+									as={Link}
+									href="https://github.com/AamuLumi/dhalmel-card-creator"
+									color="success">
+									Github
+								</Button>
+							</CardFooter>
 						</Card>
 					</div>
 

@@ -1,12 +1,6 @@
-# MeilisearchMate
+# Dhalmel Card Creator
 
-Simple webapp to debug Meilisearch  
-Built with React + Typescript  
-Build tool : Vite / SWC  
-Components : NextUI  
-CSS : Tailwind
-
-## Installation
+## Setup
 
 ```
 > npm i

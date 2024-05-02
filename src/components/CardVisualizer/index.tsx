@@ -181,7 +181,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 		const result = await html2canvas(cardElement, {
 			allowTaint: true,
 			useCORS: true,
-			backgroundColor: 'red',
+			backgroundColor: 'transparent',
 			width: CARD_WIDTH,
 			height: CARD_HEIGHT,
 		});
