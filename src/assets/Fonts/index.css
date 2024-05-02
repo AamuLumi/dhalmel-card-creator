@@ -126,7 +126,7 @@
 
 @font-face {
     font-family: 'Eurostyle';
-    src: url('./EuroStyle-Normal.ttf') format('truetype');
+    src: url('./eurostile.TTF') format('truetype');
     font-weight: 400;
     font-style: normal;
 }

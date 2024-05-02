@@ -26,7 +26,7 @@ import TexturesLines from '../../assets/CardTextures/lines.png';
 import TexturesNoise from '../../assets/CardTextures/noise.png';
 import TexturesPaper from '../../assets/CardTextures/paper.png';
 import html2canvas from 'html2canvas';
-import { getTypeName } from '../../tools/text.ts';
+import { getRarityName, getTypeName } from '../../tools/text.ts';
 
 const CARD_WIDTH = 744;
 const CARD_HEIGHT = 1394;
@@ -291,11 +291,11 @@ export default forwardRef(function CardVisualizer(_, ref) {
 						style={{
 							color: '#706F6F',
 							fontFamily: 'Eurostyle',
-							fontSize: `${computeSize(17)}pt`,
+							fontSize: `${computeSize(15)}pt`,
 							top: computeSize(64),
-							left: computeSize(100),
+							left: computeSize(70),
 						}}>
-						{String(code).padStart(4, '0')}
+						NB {String(code).padStart(4, '0')}
 					</div>
 
 					<div
@@ -303,12 +303,12 @@ export default forwardRef(function CardVisualizer(_, ref) {
 						style={{
 							color: '#706F6F',
 							fontFamily: template === 'eorzean' ? 'EorzeanCompact' : 'Eurostyle',
-							fontSize: `${computeSize(17)}pt`,
+							fontSize: `${computeSize(15)}pt`,
 							top: computeSize(64),
-							right: computeSize(100),
+							right: computeSize(70),
 							textTransform: 'capitalize',
 						}}>
-						{getTypeName(type)}
+						{getTypeName(type)}/{getRarityName(rarity)}
 					</div>
 
 					<div
