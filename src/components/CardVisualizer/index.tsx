@@ -344,6 +344,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 							top: computeSize(1070),
 							left: computeSize(70),
 							width: computeSize(600),
+							lineHeight: `${computeSize(21)}pt`,
 						}}>
 						{description}
 					</div>
