@@ -43,9 +43,9 @@ export const getTypeName = (t: DCC.Type) => {
 		case 'ascian':
 			return 'Ascien';
 		case 'creature':
-			return 'Créature';
+			return 'Creature';
 		case 'imperial':
-			return 'Impérial';
+			return 'Imperial';
 		case 'item':
 			return 'Objet';
 		case 'primordial':
@@ -55,6 +55,6 @@ export const getTypeName = (t: DCC.Type) => {
 		case 'mount':
 			return 'Monture';
 		case 'scion':
-			return 'Héritier';
+			return 'Heritier';
 	}
 };
