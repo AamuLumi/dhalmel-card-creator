@@ -58,3 +58,16 @@ export const getTypeName = (t: DCC.Type) => {
 			return 'Héritier';
 	}
 };
+
+export const getTextureName = (t: DCC.Texture) => {
+	switch (t) {
+		case 'aluminium':
+			return 'Aluminium';
+		case 'foil':
+			return 'Foil';
+		case 'holographic':
+			return 'Holographique';
+		case 'none':
+			return 'Aucun';
+	}
+};

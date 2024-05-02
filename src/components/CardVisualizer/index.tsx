@@ -113,6 +113,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 	});
 	const elRef = useRef<HTMLDivElement>(null);
 	const exportDivImageRef: any = useRef();
+	const [downloading, setDownloading] = useState(false);
 
 	const type = CardBuilder.use('type');
 	const collectionName = CardBuilder.use('collectionName');
@@ -127,6 +128,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 	const horizontalOffset = CardBuilder.use('horizontalOffset');
 	const verticalOffset = CardBuilder.use('verticalOffset');
 	const scale = CardBuilder.use('scale');
+	const texture = CardBuilder.use('texture');
 
 	const templateUrl = useMemo(() => {
 		switch (template) {
@@ -209,15 +211,24 @@ export default forwardRef(function CardVisualizer(_, ref) {
 				h: CARD_HEIGHT,
 				w: CARD_WIDTH,
 			});
+			setDownloading(true);
 
 			setTimeout(async () => {
 				await createImage();
 				setCardSize({ ...oldSize });
+				setDownloading(false);
 			});
 		} catch (reason) {
 			console.log(reason);
 		}
 	}, [cardSize, setCardSize, createImage]);
+
+	const manageMouseMove = (e: any) => {
+		const { nativeEvent } = e;
+
+		nativeEvent.target.style.setProperty('--curPos_X', nativeEvent.layerX);
+		nativeEvent.target.style.setProperty('--curPos_Y', nativeEvent.layerY);
+	};
 
 	useImperativeHandle(
 		ref,
@@ -246,6 +257,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 				style={{ padding: 16, justifyContent: 'center', alignItems: 'center' }}>
 				<div
 					ref={exportDivImageRef}
+					onMouseMove={manageMouseMove}
 					style={{
 						width: cardSize.w,
 						height: cardSize.h,
@@ -460,6 +472,25 @@ export default forwardRef(function CardVisualizer(_, ref) {
 								height: cardSize.h,
 							}}
 							className="absolute"
+						/>
+					)}
+
+					{!downloading && (
+						<div
+							style={{
+								borderRadius: computeSize(44),
+								width: cardSize.w,
+								height: cardSize.h,
+							}}
+							className={`effect ${
+								texture === 'holographic'
+									? 'holographic'
+									: texture === 'aluminium'
+									? 'aluminium'
+									: texture === 'foil'
+									? 'foil'
+									: ''
+							}`}
 						/>
 					)}
 				</div>

@@ -21,6 +21,7 @@ export namespace DCC {
 		width: number;
 		height: number;
 	};
+	export type Texture = 'aluminium' | 'holographic' | 'foil' | 'none';
 }
 
 type CardSetters = {
@@ -37,6 +38,7 @@ type CardSetters = {
 	setHorizontalOffset(n: number): void;
 	setVerticalOffset(n: number): void;
 	setScale(n: number): void;
+	setTexture(s: string): void;
 };
 
 type Card = {
@@ -49,6 +51,7 @@ type Card = {
 	credit: string;
 	rarity: DCC.Rarity;
 	template: DCC.Template;
+	texture: DCC.Texture;
 	/* DataURL img */
 	image: ArtFile | null;
 	horizontalOffset: number;
@@ -89,6 +92,7 @@ class CardBuilder {
 			horizontalOffset: typeof o.horizontalOffset === 'number' ? o.horizontalOffset : 0.5,
 			verticalOffset: typeof o.verticalOffset === 'number' ? o.verticalOffset : 0.5,
 			scale: typeof o.scale === 'number' ? o.scale : 1,
+			texture: (typeof o.texture === 'string' ? o.texture : 'none') as DCC.Texture,
 		};
 
 		const createSetter = (field: CardKeys) => (o: any) => {
@@ -113,6 +117,7 @@ class CardBuilder {
 			setHorizontalOffset: createSetter('horizontalOffset'),
 			setVerticalOffset: createSetter('verticalOffset'),
 			setScale: createSetter('scale'),
+			setTexture: createSetter('texture'),
 		};
 
 		this._currentCard = currentCard;

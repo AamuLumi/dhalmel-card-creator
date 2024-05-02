@@ -11,9 +11,11 @@ import {
 import { VscCloseAll, VscExport, VscFile, VscGithub, VscSave } from 'react-icons/vsc';
 
 import './App.css';
+import './textures.css';
 import CardVisualizer from './components/CardVisualizer';
 import CardContentConfigurator from './components/CardContentConfigurator';
 import CardBuilder from './tools/cardBuilder.ts';
+import CardMetaInfos from './components/CardMetaInfos';
 
 function readFile(file: File) {
 	if (!file) {
@@ -149,7 +151,9 @@ function App() {
 						<CardContentConfigurator />
 					</div>
 
-					<div className="flex flex-col col-span-1 row-span-3"></div>
+					<div className="flex flex-col col-span-1 row-span-3">
+						<CardMetaInfos />
+					</div>
 				</div>
 			</main>
 		</NextUIProvider>
