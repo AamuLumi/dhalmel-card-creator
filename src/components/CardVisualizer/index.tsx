@@ -353,7 +353,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 						style={{
 							color: '#6F6F6E',
 							fontFamily: 'Eurostyle',
-							fontSize: `${computeSize(14)}pt`,
+							fontSize: `${computeSize(11)}pt`,
 							top: computeSize(1304),
 							left: computeSize(70),
 							verticalAlign: 'bottom',
@@ -377,14 +377,14 @@ export default forwardRef(function CardVisualizer(_, ref) {
 						style={{
 							color: '#6F6F6E',
 							fontFamily: 'Eurostyle',
-							fontSize: `${computeSize(14)}pt`,
+							fontSize: `${computeSize(11)}pt`,
 							top: computeSize(1304),
 							right: computeSize(70),
 						}}>
 						<span
 							style={{
 								fontFamily: 'FuturaLightCondensed',
-								fontSize: `${computeSize(11)}pt`,
+								fontSize: `${computeSize(9)}pt`,
 							}}>
 							©
 						</span>
