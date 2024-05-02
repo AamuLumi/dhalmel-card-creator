@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="A_EXPORTER" data-name="A EXPORTER" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 744 1394">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #313033;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+
+      .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
+        fill: none;
+      }
+
+      .cls-7 {
+        clip-path: url(#clippath-1);
+      }
+
+      .cls-3 {
+        stroke-width: 2.26px;
+      }
+
+      .cls-3, .cls-4, .cls-5, .cls-6 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-3, .cls-5 {
+        stroke: #1d1e1b;
+      }
+
+      .cls-4 {
+        stroke-width: 4px;
+      }
+
+      .cls-4, .cls-6 {
+        stroke: #93794a;
+      }
+
+      .cls-8 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-5 {
+        stroke-width: 6.5px;
+      }
+
+      .cls-6 {
+        stroke-width: 1.39px;
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-2" y="0" width="744" height="1394"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect class="cls-2" y="0" width="744" height="1394"/>
+    </clipPath>
+  </defs>
+  <g id="FULLART">
+    <g class="cls-8">
+      <g class="cls-7">
+        <path class="cls-1" d="M675.81,1337.23H70.43c-6.59,0-11.93-5.34-11.93-11.92v-19.44c0-6.59,5.34-11.92,11.93-11.92h605.38c6.59,0,11.92,5.34,11.92,11.92v19.44c0,6.59-5.34,11.92-11.92,11.92"/>
+        <rect class="cls-3" x="58.51" y="1293.94" width="629.23" height="43.29" rx="11.92" ry="11.92"/>
+        <rect class="cls-6" x="58.51" y="1293.94" width="629.23" height="43.29" rx="11.92" ry="11.92"/>
+        <path class="cls-1" d="M679.68,100.99H64.32c-3.83,0-6.94-3.11-6.94-6.94v-29.73c0-3.83,3.11-6.94,6.94-6.94h615.35c3.83,0,6.94,3.11,6.94,6.94v29.73c0,3.83-3.11,6.94-6.94,6.94"/>
+        <rect class="cls-5" x="57.38" y="57.38" width="629.23" height="43.61" rx="6.94" ry="6.94"/>
+        <rect class="cls-4" x="57.38" y="57.38" width="629.23" height="43.61" rx="6.94" ry="6.94"/>
+      </g>
+    </g>
+  </g>
+</svg>
