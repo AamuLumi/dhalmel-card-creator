@@ -8,6 +8,8 @@ export const getTemplateName = (t: DCC.Template) => {
 			return 'Full-art';
 		case 'eorzean':
 			return 'Eorzéen';
+		case 'clean':
+			return 'Clean';
 	}
 };
 
@@ -20,7 +22,7 @@ export const getRarityName = (t: DCC.Rarity) => {
 		case 'epic':
 			return 'Epique';
 		case 'eternal':
-			return 'Eternelle';
+			return 'Eternel';
 		case 'legendary':
 			return 'Légendaire';
 		case 'mythic':

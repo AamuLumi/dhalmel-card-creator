@@ -18,8 +18,8 @@ const TYPES = [
 	'mount',
 ];
 
-const TEMPLATES = ['classic', 'eorzean', 'fullart'];
-const RARITIES = ['common', 'rare', 'epic', 'eternal', 'legendary', 'mythic', 'relic'];
+const TEMPLATES = ['classic', 'eorzean', 'fullart', 'clean'];
+const RARITIES = ['common', 'rare', 'epic', 'legendary', 'mythic', 'relic', 'eternal'];
 
 const convertBase64 = (file: File) => {
 	return new Promise((resolve, reject) => {

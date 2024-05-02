@@ -3,7 +3,7 @@ import ArtFile = DCC.ArtFile;
 
 export namespace DCC {
 	export type Rarity = 'common' | 'rare' | 'epic' | 'eternal' | 'legendary' | 'mythic' | 'relic';
-	export type Template = 'classic' | 'eorzean' | 'fullart';
+	export type Template = 'classic' | 'eorzean' | 'fullart' | 'clean';
 	export type Type =
 		| 'creature'
 		| 'item'

@@ -131,6 +131,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 	const templateUrl = useMemo(() => {
 		switch (template) {
 			case 'classic':
+			case 'clean':
 				return TemplateClassic;
 			case 'fullart':
 				return TemplateFullArt;
@@ -249,6 +250,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 						width: cardSize.w,
 						height: cardSize.h,
 						position: 'relative',
+						borderRadius: computeSize(44),
 					}}>
 					<div
 						style={{
@@ -256,13 +258,13 @@ export default forwardRef(function CardVisualizer(_, ref) {
 							height: cardSize.h,
 							position: 'absolute',
 							overflow: 'hidden',
-							borderRadius: 28,
+							borderRadius: computeSize(44),
 						}}>
 						<img
 							src={image?.data}
 							className="absolute"
 							style={{
-								borderRadius: 28,
+								borderRadius: computeSize(44),
 								width: artSize.w,
 								height: artSize.h,
 								top: `calc(-${artSize.hMoveMargin}px * ${verticalOffset})`,
@@ -278,7 +280,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 						style={{
 							top: 0,
 							left: 0,
-							borderRadius: 28,
+							borderRadius: computeSize(44),
 							width: cardSize.w,
 							height: cardSize.h,
 						}}
@@ -393,7 +395,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 					<img
 						src={TexturesLines}
 						style={{
-							borderRadius: 28,
+							borderRadius: computeSize(44),
 							width: cardSize.w,
 							height: cardSize.h,
 							opacity: 0.21,
@@ -404,7 +406,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 					<img
 						src={TexturesNoise}
 						style={{
-							borderRadius: 28,
+							borderRadius: computeSize(44),
 							width: cardSize.w,
 							height: cardSize.h,
 							opacity: 0.21,
@@ -415,7 +417,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 					<img
 						src={TexturesPaper}
 						style={{
-							borderRadius: 28,
+							borderRadius: computeSize(44),
 							width: cardSize.w,
 							height: cardSize.h,
 							opacity: 0.12,
@@ -425,7 +427,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 
 					<div
 						style={{
-							borderRadius: 28,
+							borderRadius: computeSize(44),
 							width: cardSize.w,
 							height: cardSize.h,
 							opacity: 0.06,
@@ -434,11 +436,17 @@ export default forwardRef(function CardVisualizer(_, ref) {
 						className="absolute"
 					/>
 
-					<img
-						src={rarityUrl}
-						style={{ borderRadius: 28, width: cardSize.w, height: cardSize.h }}
-						className="absolute"
-					/>
+					{template !== 'clean' && (
+						<img
+							src={rarityUrl}
+							style={{
+								borderRadius: computeSize(44),
+								width: cardSize.w,
+								height: cardSize.h,
+							}}
+							className="absolute"
+						/>
+					)}
 				</div>
 			</CardBody>
 		</Card>
