@@ -1,4 +1,4 @@
-import { DCC } from './cardBuilder.ts';
+import { DCC } from './types.ts';
 
 export const getTemplateName = (t: DCC.Template) => {
 	switch (t) {

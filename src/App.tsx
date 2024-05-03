@@ -10,32 +10,17 @@ import {
 } from '@nextui-org/react';
 import { VscCloseAll, VscExport, VscFile, VscGithub, VscSave } from 'react-icons/vsc';
 
+import CardContentConfigurator from './components/CardContentConfigurator';
+import CardMetaInfos from './components/CardMetaInfos';
+import CardVisualizer from './components/CardVisualizer';
+import CardBuilder from './tools/cardBuilder.ts';
+import Storage from './tools/storage.ts';
+import { downloadFile, readFile } from './tools/file.ts';
+
 import './App.css';
 import './textures.css';
-import CardVisualizer from './components/CardVisualizer';
-import CardContentConfigurator from './components/CardContentConfigurator';
-import CardBuilder from './tools/cardBuilder.ts';
-import CardMetaInfos from './components/CardMetaInfos';
 
-function readFile(file: File) {
-	if (!file) {
-		return;
-	}
-
-	const reader = new FileReader();
-
-	return new Promise((resolve, reject) => {
-		reader.onload = (e) => {
-			const buffer = e.target?.result;
-
-			resolve(String(buffer));
-		};
-		reader.onerror = (err) => {
-			reject(err);
-		};
-		reader.readAsText(file);
-	});
-}
+Storage.init(CardBuilder);
 
 function App() {
 	const title = CardBuilder.use('title');
@@ -68,11 +53,7 @@ function App() {
 			type: 'application/json',
 		});
 
-		const anchor = document.createElement('a');
-		anchor.href = URL.createObjectURL(f);
-		anchor.download = `${title}.dcf`;
-		anchor.click();
-		anchor.remove();
+		downloadFile(URL.createObjectURL(f), `${title}.dcf`);
 	}, [title]);
 
 	const openFileExplorer = useCallback(() => {

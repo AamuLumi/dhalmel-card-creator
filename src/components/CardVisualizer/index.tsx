@@ -8,7 +8,7 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import CardBuilder, { DCC } from '../../tools/cardBuilder.ts';
+import CardBuilder from '../../tools/cardBuilder.ts';
 
 import TemplateClassic from '../../assets/CardTemplates/classic.png';
 import TemplateFullArt from '../../assets/CardTemplates/fullart.png';
@@ -27,6 +27,8 @@ import TexturesNoise from '../../assets/CardTextures/noise.png';
 import TexturesPaper from '../../assets/CardTextures/paper.png';
 import html2canvas from 'html2canvas';
 import { getRarityName, getTypeName } from '../../tools/text.ts';
+import { DCC } from '../../tools/types.ts';
+import { downloadFile } from '../../tools/file.ts';
 
 const CARD_WIDTH = 744;
 const CARD_HEIGHT = 1394;
@@ -191,12 +193,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 
 		style.remove();
 
-		const asURL = result.toDataURL('image/png');
-		const anchor = document.createElement('a');
-		anchor.href = asURL;
-		anchor.download = `${title}.png`;
-		anchor.click();
-		anchor.remove();
+		downloadFile(result.toDataURL('image/png'), `${title}.png`);
 	}, [title]);
 
 	const downloadImage = useCallback(async () => {

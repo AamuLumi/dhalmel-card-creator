@@ -1,7 +1,8 @@
 import { Card, CardBody } from '@nextui-org/react';
 import RadioList, { RadioListItem } from '../../atoms/RadioList';
-import CardBuilder, { DCC } from '../../tools/cardBuilder.ts';
+import CardBuilder from '../../tools/cardBuilder.ts';
 import { getTextureName } from '../../tools/text.ts';
+import { DCC } from '../../tools/types.ts';
 
 const TEXTURES = ['none', 'foil', 'aluminium', 'holographic'];
 

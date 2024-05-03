@@ -1,76 +1,30 @@
 import { useSyncExternalStore } from 'react';
-import ArtFile = DCC.ArtFile;
+import Storage from './storage.ts';
+import { DCC } from './types.ts';
 
-export namespace DCC {
-	export type Rarity = 'common' | 'rare' | 'epic' | 'eternal' | 'legendary' | 'mythic' | 'relic';
-	export type Template = 'classic' | 'eorzean' | 'fullart' | 'clean';
-	export type Type =
-		| 'creature'
-		| 'item'
-		| 'land'
-		| 'god'
-		| 'action'
-		| 'human'
-		| 'imperial'
-		| 'primordial'
-		| 'scion'
-		| 'ascian'
-		| 'mount';
-	export type ArtFile = {
-		data: string;
-		width: number;
-		height: number;
-	};
-	export type Texture = 'aluminium' | 'holographic' | 'foil' | 'none';
-}
-
-type CardSetters = {
-	setCode(n: number): void;
-	setTitle(s: string): void;
-	setType(s: string): void;
-	setDescription(s: string): void;
-	setCollectionName(s: string): void;
-	setIllustratorName(s: string): void;
-	setCredit(s: string): void;
-	setRarity(s: string): void;
-	setTemplate(s: string): void;
-	setImage(s: ArtFile | null): void;
-	setHorizontalOffset(n: number): void;
-	setVerticalOffset(n: number): void;
-	setScale(n: number): void;
-	setTexture(s: string): void;
-};
-
-type Card = {
-	code: number;
-	title: string;
-	type: string;
-	description: string;
-	collectionName: string;
-	illustratorName: string;
-	credit: string;
-	rarity: DCC.Rarity;
-	template: DCC.Template;
-	texture: DCC.Texture;
-	/* DataURL img */
-	image: ArtFile | null;
-	horizontalOffset: number;
-	verticalOffset: number;
-	scale: number;
-};
-
-type CardKeys = keyof Card;
+const SAVE_INTERVAL = 2000;
 
 class CardBuilder {
-	private _currentCard: Card | null = null;
-	private _listeners: Record<CardKeys, Array<() => void>>;
-	public setters: CardSetters = {} as any;
+	private _currentCard: DCC.Card | null = null;
+	private readonly _listeners: Record<DCC.CardKeys, Array<() => void>>;
+	private _needSave: boolean = false;
+
+	public setters: DCC.CardSetters = {} as any;
 
 	constructor() {
 		this._listeners = {} as any;
 
 		this.initCard();
+
+		setInterval(this._saveToLocalStorage, SAVE_INTERVAL);
 	}
+
+	private _saveToLocalStorage = () => {
+		if (this._currentCard && this._needSave) {
+			Storage.saveCard(this._currentCard);
+			this._needSave = false;
+		}
+	};
 
 	initCard(o: Record<string, unknown> = {}) {
 		const currentCard = {
@@ -84,7 +38,7 @@ class CardBuilder {
 			illustratorName: typeof o.illustratorName === 'string' ? o.illustratorName : '',
 			image:
 				typeof o.image === 'object'
-					? (o.image as ArtFile)
+					? (o.image as DCC.ArtFile)
 					: typeof o.image === 'string'
 					? JSON.parse(o.image)
 					: null,
@@ -95,9 +49,10 @@ class CardBuilder {
 			texture: (typeof o.texture === 'string' ? o.texture : 'none') as DCC.Texture,
 		};
 
-		const createSetter = (field: CardKeys) => (o: any) => {
+		const createSetter = (field: DCC.CardKeys) => (o: any) => {
 			(this._currentCard as any)[field as any] = o;
 
+			this._needSave = true;
 			this._notify(field);
 
 			return this._currentCard;
@@ -121,6 +76,7 @@ class CardBuilder {
 		};
 
 		this._currentCard = currentCard;
+		this._needSave = true;
 
 		Object.keys(this._currentCard).forEach((key: any) => {
 			this._notify(key);
@@ -137,17 +93,17 @@ class CardBuilder {
 		}
 	}
 
-	toString(o: Card) {
+	toString(o: DCC.Card) {
 		return JSON.stringify(o);
 	}
 
-	private _notify = (event: CardKeys) => {
+	private _notify = (event: DCC.CardKeys) => {
 		if (this._listeners[event]) {
 			this._listeners[event].forEach((f) => f());
 		}
 	};
 
-	private _on = (event: CardKeys, fn: () => void) => {
+	private _on = (event: DCC.CardKeys, fn: () => void) => {
 		if (!this._listeners[event]) {
 			this._listeners[event] = [];
 		}
@@ -163,7 +119,7 @@ class CardBuilder {
 		};
 	};
 
-	private _get = (e: CardKeys): any => {
+	private _get = (e: DCC.CardKeys): any => {
 		if (!this._currentCard) {
 			return null;
 		}
@@ -171,7 +127,7 @@ class CardBuilder {
 		return this._currentCard[e];
 	};
 
-	use = (e: CardKeys) => {
+	use = (e: DCC.CardKeys) => {
 		return useSyncExternalStore(
 			(fn) => this._on(e, fn),
 			() => this._get(e),
