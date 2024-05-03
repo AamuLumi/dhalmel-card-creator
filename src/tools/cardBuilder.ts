@@ -9,7 +9,7 @@ class CardBuilder {
 	private readonly _listeners: Record<DCC.CardKeys, Array<() => void>>;
 	private _needSave: boolean = false;
 
-	public setters: DCC.CardSetters = {} as any;
+	public Setters: DCC.CardSetters = {} as any;
 
 	constructor() {
 		this._listeners = {} as any;
@@ -58,7 +58,7 @@ class CardBuilder {
 			return this._currentCard;
 		};
 
-		this.setters = {
+		this.Setters = {
 			setCode: createSetter('code'),
 			setType: createSetter('type'),
 			setTitle: createSetter('title'),

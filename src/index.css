@@ -1,6 +1,9 @@
+@import "./textures/textures.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -47,4 +50,12 @@ main {
 
 main.dark {
   background-color: transparent;
+}
+
+.card-group-2 {
+  display: none;
+}
+
+.card-group-3 {
+  display: none;
 }

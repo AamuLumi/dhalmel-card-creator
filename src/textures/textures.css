@@ -1,0 +1,21 @@
+@import "aluminium.css";
+@import "foil.css";
+@import "holographic.css";
+@import "vhs.css";
+
+.effect {
+        --space: 4%;
+
+        --w: 372px;
+        --h: 697px;
+
+        --curPos_X: var(--w) / 2;
+        --curPos_Y: var(--h) / 2;
+
+        width: var(--w);
+        height: var(--h);
+
+        position: absolute;
+
+        border-radius: 25px;
+}

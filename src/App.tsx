@@ -18,7 +18,6 @@ import Storage from './tools/storage.ts';
 import { downloadFile, readFile } from './tools/file.ts';
 
 import './App.css';
-import './textures.css';
 
 Storage.init(CardBuilder);
 

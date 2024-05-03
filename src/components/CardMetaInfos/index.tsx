@@ -3,8 +3,7 @@ import RadioList, { RadioListItem } from '../../atoms/RadioList';
 import CardBuilder from '../../tools/cardBuilder.ts';
 import { getTextureName } from '../../tools/text.ts';
 import { DCC } from '../../tools/types.ts';
-
-const TEXTURES = ['none', 'foil', 'aluminium', 'holographic'];
+import Constants from '../../tools/constants.ts';
 
 export default function CardMetaInfos(_: any) {
 	const texture = CardBuilder.use('texture');
@@ -14,9 +13,9 @@ export default function CardMetaInfos(_: any) {
 			<CardBody>
 				<RadioList
 					label="Texture"
-					onValueChange={CardBuilder.setters.setTexture}
+					onValueChange={CardBuilder.Setters.setTexture}
 					value={texture}>
-					{TEXTURES.map((type) => (
+					{Constants.Textures.map((type) => (
 						<RadioListItem key={type} value={type}>
 							{getTextureName(type as DCC.Texture)}
 						</RadioListItem>
