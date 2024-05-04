@@ -262,6 +262,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 				borderRadius: computeSize(44),
 			}}>
 			<div
+				className="card-illustration-container"
 				style={{
 					width: cardSize.w,
 					height: cardSize.h,
@@ -271,7 +272,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 				}}>
 				<img
 					src={image?.data}
-					className="absolute"
+					className="absolute card-illustration"
 					style={{
 						borderRadius: computeSize(44),
 						width: artSize.w,
@@ -483,6 +484,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 				className={`effect ${texture === 'none' ? '' : `texture-container-${texture}`}`}
 				style={{ padding: 16, justifyContent: 'center', alignItems: 'center' }}>
 				<div
+					className="card-container"
 					ref={exportDivImageRef}
 					onMouseMove={manageMouseMove}
 					style={{
