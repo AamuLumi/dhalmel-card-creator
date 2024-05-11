@@ -60,4 +60,6 @@ export namespace DCC {
 	};
 
 	export type CardKeys = keyof Card;
+
+	export type DevEvents = 'devMode';
 }
