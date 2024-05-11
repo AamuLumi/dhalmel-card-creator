@@ -11,6 +11,7 @@ class BaseDevTools {
 
 		if (enabled) {
 			Constants.Textures.push('vhs');
+			Constants.Textures.push('negative');
 			Constants.Templates.push('cursed');
 		}
 	}
@@ -18,7 +19,6 @@ class BaseDevTools {
 	public isDevMode = () => this._devModeEnabled;
 
 	public toggleDevMode = () => {
-		console.log('current', this._devModeEnabled);
 		this._devModeEnabled = !this._devModeEnabled;
 		setTimeout(() => {
 			Storage.saveDevMode(this._devModeEnabled);

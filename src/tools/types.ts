@@ -22,7 +22,7 @@ export namespace DCC {
 		height: number;
 	};
 
-	export type Texture = 'aluminium' | 'holographic' | 'foil' | 'none' | 'vhs';
+	export type Texture = 'aluminium' | 'holographic' | 'foil' | 'none' | 'vhs' | 'negative';
 
 	export type Card = {
 		code: number;

@@ -1,5 +1,4 @@
 import { DCC } from './types.ts';
-import { get } from 'immutable';
 
 export const getTemplateName = (t: DCC.Template) => {
 	switch (t) {
@@ -11,6 +10,8 @@ export const getTemplateName = (t: DCC.Template) => {
 			return 'Eorzéen';
 		case 'clean':
 			return 'Clean';
+		case 'cursed':
+			return '[DEV] Cursed';
 		default:
 			return `MISSING_${t}`;
 	}
@@ -76,6 +77,10 @@ export const getTextureName = (t: DCC.Texture) => {
 			return 'Holographique';
 		case 'none':
 			return 'Aucun';
+		case 'vhs':
+			return '[DEV] VHS';
+		case 'negative':
+			return '[DEV] Negative';
 		default:
 			return `MISSING_${t}`;
 	}
