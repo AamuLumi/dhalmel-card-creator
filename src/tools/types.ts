@@ -1,6 +1,8 @@
 export namespace DCC {
 	export type Rarity = 'common' | 'rare' | 'epic' | 'eternal' | 'legendary' | 'mythic' | 'relic';
-	export type Template = 'classic' | 'eorzean' | 'fullart' | 'clean';
+
+	export type Template = 'classic' | 'eorzean' | 'fullart' | 'clean' | 'cursed';
+
 	export type Type =
 		| 'creature'
 		| 'item'
@@ -13,12 +15,14 @@ export namespace DCC {
 		| 'scion'
 		| 'ascian'
 		| 'mount';
+
 	export type ArtFile = {
 		data: string;
 		width: number;
 		height: number;
 	};
-	export type Texture = 'aluminium' | 'holographic' | 'foil' | 'none';
+
+	export type Texture = 'aluminium' | 'holographic' | 'foil' | 'none' | 'vhs';
 
 	export type Card = {
 		code: number;
@@ -56,4 +60,6 @@ export namespace DCC {
 	};
 
 	export type CardKeys = keyof Card;
+
+	export type DevEvents = 'devMode';
 }

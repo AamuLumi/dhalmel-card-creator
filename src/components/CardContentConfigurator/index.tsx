@@ -5,23 +5,7 @@ import RadioList, { RadioListItem } from '../../atoms/RadioList';
 import { getRarityName, getTemplateName, getTypeName } from '../../tools/text.ts';
 import { DCC } from '../../tools/types.ts';
 import { convertBase64, imageSize } from '../../tools/file.ts';
-
-const TYPES = [
-	'creature',
-	'item',
-	'land',
-	'god',
-	'action',
-	'human',
-	'imperial',
-	'primordial',
-	'scion',
-	'ascian',
-	'mount',
-];
-
-const TEMPLATES = ['classic', 'eorzean', 'fullart', 'clean'];
-const RARITIES = ['common', 'rare', 'epic', 'legendary', 'mythic', 'relic', 'eternal'];
+import Constants from '../../tools/constants.ts';
 
 export default function CardContentConfigurator(_: any) {
 	const type = CardBuilder.use('type');
@@ -38,7 +22,7 @@ export default function CardContentConfigurator(_: any) {
 	const scale = CardBuilder.use('scale');
 
 	const onCodeChange = (e: string) => {
-		CardBuilder.setters.setCode(parseInt(e, 10));
+		CardBuilder.Setters.setCode(parseInt(e, 10));
 	};
 
 	const onImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +36,7 @@ export default function CardContentConfigurator(_: any) {
 		const base64 = (await convertBase64(file)) as string;
 		const { width, height } = await imageSize(base64);
 
-		CardBuilder.setters.setImage({
+		CardBuilder.Setters.setImage({
 			data: base64,
 			height,
 			width,
@@ -66,7 +50,7 @@ export default function CardContentConfigurator(_: any) {
 					type="text"
 					label="Nom"
 					value={title}
-					onValueChange={CardBuilder.setters.setTitle}
+					onValueChange={CardBuilder.Setters.setTitle}
 				/>
 
 				<Input
@@ -84,7 +68,7 @@ export default function CardContentConfigurator(_: any) {
 					type="text"
 					label="Description"
 					value={description}
-					onValueChange={CardBuilder.setters.setDescription}
+					onValueChange={CardBuilder.Setters.setDescription}
 				/>
 
 				<div className="mt-4 flex w-full items-center justify-between space-x-4 p-2 border-2  hover:border-gray-400 rounded-xl transition-colors duration-300">
@@ -107,7 +91,7 @@ export default function CardContentConfigurator(_: any) {
 						formatOptions={{ style: 'percent' }}
 						showTooltip
 						value={horizontalOffset}
-						onChange={CardBuilder.setters.setHorizontalOffset as any}
+						onChange={CardBuilder.Setters.setHorizontalOffset as any}
 					/>
 
 					<Slider
@@ -119,7 +103,7 @@ export default function CardContentConfigurator(_: any) {
 						formatOptions={{ style: 'percent' }}
 						showTooltip
 						value={verticalOffset}
-						onChange={CardBuilder.setters.setVerticalOffset as any}
+						onChange={CardBuilder.Setters.setVerticalOffset as any}
 					/>
 				</div>
 
@@ -131,15 +115,15 @@ export default function CardContentConfigurator(_: any) {
 					maxValue={8}
 					showTooltip
 					value={scale}
-					onChange={CardBuilder.setters.setScale as any}
+					onChange={CardBuilder.Setters.setScale as any}
 				/>
 
 				<RadioList
 					className="mt-4"
 					label="Template"
-					onValueChange={CardBuilder.setters.setTemplate}
+					onValueChange={CardBuilder.Setters.setTemplate}
 					value={template}>
-					{TEMPLATES.map((type) => (
+					{Constants.Templates.map((type) => (
 						<RadioListItem key={type} value={type}>
 							{getTemplateName(type as DCC.Template)}
 						</RadioListItem>
@@ -149,9 +133,9 @@ export default function CardContentConfigurator(_: any) {
 				<RadioList
 					className="mt-4"
 					label="Type"
-					onValueChange={CardBuilder.setters.setType}
+					onValueChange={CardBuilder.Setters.setType}
 					value={type}>
-					{TYPES.map((type) => (
+					{Constants.Types.map((type) => (
 						<RadioListItem key={type} value={type}>
 							{getTypeName(type as DCC.Type)}
 						</RadioListItem>
@@ -161,9 +145,9 @@ export default function CardContentConfigurator(_: any) {
 				<RadioList
 					className="mt-4"
 					label="Rareté"
-					onValueChange={CardBuilder.setters.setRarity}
+					onValueChange={CardBuilder.Setters.setRarity}
 					value={rarity}>
-					{RARITIES.map((rarity) => (
+					{Constants.Rarities.map((rarity) => (
 						<RadioListItem key={rarity} value={rarity}>
 							{getRarityName(rarity as DCC.Rarity)}
 						</RadioListItem>
@@ -175,7 +159,7 @@ export default function CardContentConfigurator(_: any) {
 					type="text"
 					label="Collection"
 					value={collectionName}
-					onValueChange={CardBuilder.setters.setCollectionName}
+					onValueChange={CardBuilder.Setters.setCollectionName}
 				/>
 
 				<Input
@@ -183,7 +167,7 @@ export default function CardContentConfigurator(_: any) {
 					type="text"
 					label="Crédit"
 					value={credit}
-					onValueChange={CardBuilder.setters.setCredit}
+					onValueChange={CardBuilder.Setters.setCredit}
 				/>
 
 				<Input
@@ -191,7 +175,7 @@ export default function CardContentConfigurator(_: any) {
 					type="text"
 					label="Illustrateur•trice"
 					value={illustratorName}
-					onValueChange={CardBuilder.setters.setIllustratorName}
+					onValueChange={CardBuilder.Setters.setIllustratorName}
 				/>
 			</CardBody>
 		</Card>

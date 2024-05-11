@@ -1,19 +1,16 @@
-import { useSyncExternalStore } from 'react';
 import Storage from './storage.ts';
 import { DCC } from './types.ts';
+import { WithListenHook } from './withListenHook.ts';
 
 const SAVE_INTERVAL = 2000;
 
-class CardBuilder {
+class BaseCardBuilder {
 	private _currentCard: DCC.Card | null = null;
-	private readonly _listeners: Record<DCC.CardKeys, Array<() => void>>;
 	private _needSave: boolean = false;
 
-	public setters: DCC.CardSetters = {} as any;
+	public Setters: DCC.CardSetters = {} as any;
 
 	constructor() {
-		this._listeners = {} as any;
-
 		this.initCard();
 
 		setInterval(this._saveToLocalStorage, SAVE_INTERVAL);
@@ -58,7 +55,7 @@ class CardBuilder {
 			return this._currentCard;
 		};
 
-		this.setters = {
+		this.Setters = {
 			setCode: createSetter('code'),
 			setType: createSetter('type'),
 			setTitle: createSetter('title'),
@@ -97,29 +94,7 @@ class CardBuilder {
 		return JSON.stringify(o);
 	}
 
-	private _notify = (event: DCC.CardKeys) => {
-		if (this._listeners[event]) {
-			this._listeners[event].forEach((f) => f());
-		}
-	};
-
-	private _on = (event: DCC.CardKeys, fn: () => void) => {
-		if (!this._listeners[event]) {
-			this._listeners[event] = [];
-		}
-
-		this._listeners[event].push(fn);
-
-		return () => {
-			const index = this._listeners[event].indexOf(fn);
-
-			if (index > -1) {
-				this._listeners[event].splice(index, 1);
-			}
-		};
-	};
-
-	private _get = (e: DCC.CardKeys): any => {
+	_get = (e: DCC.CardKeys): any => {
 		if (!this._currentCard) {
 			return null;
 		}
@@ -127,15 +102,12 @@ class CardBuilder {
 		return this._currentCard[e];
 	};
 
-	use = (e: DCC.CardKeys) => {
-		return useSyncExternalStore(
-			(fn) => this._on(e, fn),
-			() => this._get(e),
-		);
-	};
+	_notify = (_: DCC.CardKeys) => {};
 
 	getCurrentCard = () => this._currentCard;
 	getCurrentCardToString = () => JSON.stringify(this._currentCard);
 }
+
+const CardBuilder = WithListenHook<DCC.CardKeys, typeof BaseCardBuilder>(BaseCardBuilder);
 
 export default new CardBuilder();

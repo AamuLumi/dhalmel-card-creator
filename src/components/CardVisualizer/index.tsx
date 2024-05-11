@@ -26,7 +26,7 @@ import TexturesLines from '../../assets/CardTextures/lines.png';
 import TexturesNoise from '../../assets/CardTextures/noise.png';
 import TexturesPaper from '../../assets/CardTextures/paper.png';
 import html2canvas from 'html2canvas';
-import { getRarityName, getTypeName } from '../../tools/text.ts';
+import { getRarityName, getTypeName, zalgoRandomGeneration } from '../../tools/text.ts';
 import { DCC } from '../../tools/types.ts';
 import { downloadFile } from '../../tools/file.ts';
 
@@ -246,13 +246,245 @@ export default forwardRef(function CardVisualizer(_, ref) {
 		});
 	}, []);
 
+	const transformedDescription =
+		template === 'cursed' || template === 'eorzean'
+			? zalgoRandomGeneration(description, 3)
+			: description;
+
+	const cardBlock = (className: string = '') => (
+		<div
+			className={className}
+			style={{
+				width: cardSize.w,
+				height: cardSize.h,
+				position: 'absolute',
+				overflow: 'hidden',
+				borderRadius: computeSize(44),
+			}}>
+			<div
+				className="card-illustration-container"
+				style={{
+					width: cardSize.w,
+					height: cardSize.h,
+					position: 'absolute',
+					overflow: 'hidden',
+					borderRadius: computeSize(44),
+				}}>
+				<img
+					src={image?.data}
+					className="absolute card-illustration"
+					style={{
+						borderRadius: computeSize(44),
+						width: artSize.w,
+						height: artSize.h,
+						top: `calc(-${artSize.hMoveMargin}px * ${verticalOffset})`,
+						left: `calc(-${artSize.wMoveMargin}px * ${horizontalOffset})`,
+						maxWidth: 'none',
+					}}
+				/>
+			</div>
+
+			<img
+				src={templateUrl}
+				className="absolute"
+				style={{
+					top: 0,
+					left: 0,
+					borderRadius: computeSize(44),
+					width: cardSize.w,
+					height: cardSize.h,
+				}}
+			/>
+
+			<div
+				className="absolute"
+				style={{
+					color: '#706F6F',
+					fontFamily: 'Eurostyle',
+					fontSize: `${computeSize(15)}pt`,
+					top: computeSize(64),
+					left: computeSize(70),
+				}}>
+				NB {String(code).padStart(4, '0')}
+			</div>
+
+			<div
+				className="absolute"
+				style={{
+					color: '#706F6F',
+					fontFamily: template === 'eorzean' ? 'EorzeanCompact' : 'Eurostyle',
+					fontSize: `${computeSize(15)}pt`,
+					top: computeSize(64),
+					right: computeSize(70),
+					textTransform: 'capitalize',
+				}}>
+				{getTypeName(type)}/{getRarityName(rarity)}
+			</div>
+
+			<div
+				className="absolute"
+				style={{
+					color: '#000000',
+					fontFamily: template === 'eorzean' ? 'Eorzean' : 'Trajan',
+					fontSize: `${computeSize(34)}pt`,
+					top: computeSize(996),
+					left: computeSize(82),
+				}}>
+				{title}
+			</div>
+
+			<div
+				className="absolute"
+				style={{
+					color: '#B19B50',
+					fontFamily: template === 'eorzean' ? 'Eorzean' : 'Trajan',
+					fontSize: `${computeSize(34)}pt`,
+					top: computeSize(994),
+					left: computeSize(80),
+				}}>
+				{title}
+			</div>
+
+			<div
+				className="absolute"
+				style={{
+					color: '#000000',
+					fontFamily: template === 'eorzean' ? 'Eorzean' : 'Myriad',
+					fontSize: `${computeSize(15)}pt`,
+					top: computeSize(1072),
+					left: computeSize(72),
+					width: computeSize(600),
+					lineHeight: `${computeSize(21)}pt`,
+				}}>
+				{transformedDescription}
+			</div>
+
+			<div
+				className="absolute"
+				style={{
+					color: '#EDE1C5',
+					fontFamily: template === 'eorzean' ? 'Eorzean' : 'Myriad',
+					fontSize: `${computeSize(15)}pt`,
+					top: computeSize(1070),
+					left: computeSize(70),
+					width: computeSize(600),
+					lineHeight: `${computeSize(21)}pt`,
+					overflow: 'visible',
+				}}>
+				{transformedDescription}
+			</div>
+
+			<div
+				className="absolute"
+				style={{
+					color: '#6F6F6E',
+					fontFamily: 'Eurostyle',
+					fontSize: `${computeSize(11)}pt`,
+					top: computeSize(1304),
+					left: computeSize(70),
+					verticalAlign: 'bottom',
+				}}>
+				Collection {collectionName}{' '}
+				<span
+					style={{
+						lineHeight: `${computeSize(0)}px`,
+						height: `${computeSize(0)}px`,
+						verticalAlign: 'middle',
+						fontSize: `${computeSize(10)}pt`,
+						fontFamily: 'sans-serif',
+					}}>
+					&#9658;
+				</span>{' '}
+				Illustration : {illustratorName}
+			</div>
+
+			<div
+				className="absolute"
+				style={{
+					color: '#6F6F6E',
+					fontFamily: 'Eurostyle',
+					fontSize: `${computeSize(11)}pt`,
+					top: computeSize(1304),
+					right: computeSize(70),
+				}}>
+				<span
+					style={{
+						fontFamily: 'FuturaLightCondensed',
+						fontSize: `${computeSize(9)}pt`,
+					}}>
+					©
+				</span>
+				2024 Dhalmel Corp/
+				{credit}
+			</div>
+
+			<img
+				src={TexturesLines}
+				style={{
+					borderRadius: computeSize(44),
+					width: cardSize.w,
+					height: cardSize.h,
+					opacity: 0.21,
+				}}
+				className="absolute"
+			/>
+
+			<img
+				src={TexturesNoise}
+				style={{
+					borderRadius: computeSize(44),
+					width: cardSize.w,
+					height: cardSize.h,
+					opacity: 0.21,
+				}}
+				className="absolute"
+			/>
+
+			<img
+				src={TexturesPaper}
+				style={{
+					borderRadius: computeSize(44),
+					width: cardSize.w,
+					height: cardSize.h,
+					opacity: 0.12,
+				}}
+				className="absolute"
+			/>
+
+			<div
+				style={{
+					borderRadius: computeSize(44),
+					width: cardSize.w,
+					height: cardSize.h,
+					opacity: 0.06,
+					backgroundColor: 'black',
+				}}
+				className="absolute"
+			/>
+
+			{template !== 'clean' && (
+				<img
+					src={rarityUrl}
+					style={{
+						borderRadius: computeSize(44),
+						width: cardSize.w,
+						height: cardSize.h,
+					}}
+					className="absolute"
+				/>
+			)}
+		</div>
+	);
+
 	return (
 		<Card className="flex-shrink-0 flex flex-grow">
 			<CardBody
 				// @ts-ignore
 				ref={elRef}
+				className={`effect ${texture === 'none' ? '' : `texture-container-${texture}`}`}
 				style={{ padding: 16, justifyContent: 'center', alignItems: 'center' }}>
 				<div
+					className="card-container"
 					ref={exportDivImageRef}
 					onMouseMove={manageMouseMove}
 					style={{
@@ -260,217 +492,11 @@ export default forwardRef(function CardVisualizer(_, ref) {
 						height: cardSize.h,
 						position: 'relative',
 						borderRadius: computeSize(44),
+						overflow: 'hidden',
 					}}>
-					<div
-						style={{
-							width: cardSize.w,
-							height: cardSize.h,
-							position: 'absolute',
-							overflow: 'hidden',
-							borderRadius: computeSize(44),
-						}}>
-						<img
-							src={image?.data}
-							className="absolute"
-							style={{
-								borderRadius: computeSize(44),
-								width: artSize.w,
-								height: artSize.h,
-								top: `calc(-${artSize.hMoveMargin}px * ${verticalOffset})`,
-								left: `calc(-${artSize.wMoveMargin}px * ${horizontalOffset})`,
-								maxWidth: 'none',
-							}}
-						/>
-					</div>
-
-					<img
-						src={templateUrl}
-						className="absolute"
-						style={{
-							top: 0,
-							left: 0,
-							borderRadius: computeSize(44),
-							width: cardSize.w,
-							height: cardSize.h,
-						}}
-					/>
-
-					<div
-						className="absolute"
-						style={{
-							color: '#706F6F',
-							fontFamily: 'Eurostyle',
-							fontSize: `${computeSize(15)}pt`,
-							top: computeSize(64),
-							left: computeSize(70),
-						}}>
-						NB {String(code).padStart(4, '0')}
-					</div>
-
-					<div
-						className="absolute"
-						style={{
-							color: '#706F6F',
-							fontFamily: template === 'eorzean' ? 'EorzeanCompact' : 'Eurostyle',
-							fontSize: `${computeSize(15)}pt`,
-							top: computeSize(64),
-							right: computeSize(70),
-							textTransform: 'capitalize',
-						}}>
-						{getTypeName(type)}/{getRarityName(rarity)}
-					</div>
-
-					<div
-						className="absolute"
-						style={{
-							color: '#000000',
-							fontFamily: template === 'eorzean' ? 'Eorzean' : 'Trajan',
-							fontSize: `${computeSize(34)}pt`,
-							top: computeSize(996),
-							left: computeSize(82),
-						}}>
-						{title}
-					</div>
-
-					<div
-						className="absolute"
-						style={{
-							color: '#B19B50',
-							fontFamily: template === 'eorzean' ? 'Eorzean' : 'Trajan',
-							fontSize: `${computeSize(34)}pt`,
-							top: computeSize(994),
-							left: computeSize(80),
-						}}>
-						{title}
-					</div>
-
-					<div
-						className="absolute"
-						style={{
-							color: '#000000',
-							fontFamily: template === 'eorzean' ? 'Eorzean' : 'Myriad',
-							fontSize: `${computeSize(15)}pt`,
-							top: computeSize(1072),
-							left: computeSize(72),
-							width: computeSize(600),
-							lineHeight: `${computeSize(21)}pt`,
-						}}>
-						{description}
-					</div>
-
-					<div
-						className="absolute"
-						style={{
-							color: '#EDE1C5',
-							fontFamily: template === 'eorzean' ? 'Eorzean' : 'Myriad',
-							fontSize: `${computeSize(15)}pt`,
-							top: computeSize(1070),
-							left: computeSize(70),
-							width: computeSize(600),
-							lineHeight: `${computeSize(21)}pt`,
-						}}>
-						{description}
-					</div>
-
-					<div
-						className="absolute"
-						style={{
-							color: '#6F6F6E',
-							fontFamily: 'Eurostyle',
-							fontSize: `${computeSize(11)}pt`,
-							top: computeSize(1304),
-							left: computeSize(70),
-							verticalAlign: 'bottom',
-						}}>
-						Collection {collectionName}{' '}
-						<span
-							style={{
-								lineHeight: `${computeSize(0)}px`,
-								height: `${computeSize(0)}px`,
-								verticalAlign: 'middle',
-								fontSize: `${computeSize(10)}pt`,
-								fontFamily: 'sans-serif',
-							}}>
-							&#9658;
-						</span>{' '}
-						Illustration : {illustratorName}
-					</div>
-
-					<div
-						className="absolute"
-						style={{
-							color: '#6F6F6E',
-							fontFamily: 'Eurostyle',
-							fontSize: `${computeSize(11)}pt`,
-							top: computeSize(1304),
-							right: computeSize(70),
-						}}>
-						<span
-							style={{
-								fontFamily: 'FuturaLightCondensed',
-								fontSize: `${computeSize(9)}pt`,
-							}}>
-							©
-						</span>
-						2024 Dhalmel Corp/
-						{credit}
-					</div>
-
-					<img
-						src={TexturesLines}
-						style={{
-							borderRadius: computeSize(44),
-							width: cardSize.w,
-							height: cardSize.h,
-							opacity: 0.21,
-						}}
-						className="absolute"
-					/>
-
-					<img
-						src={TexturesNoise}
-						style={{
-							borderRadius: computeSize(44),
-							width: cardSize.w,
-							height: cardSize.h,
-							opacity: 0.21,
-						}}
-						className="absolute"
-					/>
-
-					<img
-						src={TexturesPaper}
-						style={{
-							borderRadius: computeSize(44),
-							width: cardSize.w,
-							height: cardSize.h,
-							opacity: 0.12,
-						}}
-						className="absolute"
-					/>
-
-					<div
-						style={{
-							borderRadius: computeSize(44),
-							width: cardSize.w,
-							height: cardSize.h,
-							opacity: 0.06,
-							backgroundColor: 'black',
-						}}
-						className="absolute"
-					/>
-
-					{template !== 'clean' && (
-						<img
-							src={rarityUrl}
-							style={{
-								borderRadius: computeSize(44),
-								width: cardSize.w,
-								height: cardSize.h,
-							}}
-							className="absolute"
-						/>
-					)}
+					{cardBlock('card-group-1')}
+					{cardBlock('card-group-2')}
+					{cardBlock('card-group-3')}
 
 					{!downloading && (
 						<div
@@ -479,15 +505,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 								width: cardSize.w,
 								height: cardSize.h,
 							}}
-							className={`effect ${
-								texture === 'holographic'
-									? 'holographic'
-									: texture === 'aluminium'
-									? 'aluminium'
-									: texture === 'foil'
-									? 'foil'
-									: ''
-							}`}
+							className={`effect ${texture === 'none' ? '' : texture}`}
 						/>
 					)}
 				</div>

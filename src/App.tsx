@@ -14,13 +14,13 @@ import CardContentConfigurator from './components/CardContentConfigurator';
 import CardMetaInfos from './components/CardMetaInfos';
 import CardVisualizer from './components/CardVisualizer';
 import CardBuilder from './tools/cardBuilder.ts';
+import DevTools from './tools/devTools.ts';
 import Storage from './tools/storage.ts';
 import { downloadFile, readFile } from './tools/file.ts';
 
 import './App.css';
-import './textures.css';
 
-Storage.init(CardBuilder);
+Storage.init(CardBuilder, DevTools);
 
 function App() {
 	const title = CardBuilder.use('title');
