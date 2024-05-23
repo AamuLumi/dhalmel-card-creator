@@ -258,7 +258,6 @@ export default forwardRef(function CardVisualizer(_, ref) {
 				width: cardSize.w,
 				height: cardSize.h,
 				position: 'absolute',
-				overflow: 'hidden',
 				borderRadius: computeSize(44),
 			}}>
 			<div
@@ -267,7 +266,6 @@ export default forwardRef(function CardVisualizer(_, ref) {
 					width: cardSize.w,
 					height: cardSize.h,
 					position: 'absolute',
-					overflow: 'hidden',
 					borderRadius: computeSize(44),
 				}}>
 				<img
@@ -492,22 +490,30 @@ export default forwardRef(function CardVisualizer(_, ref) {
 						height: cardSize.h,
 						position: 'relative',
 						borderRadius: computeSize(44),
-						overflow: 'hidden',
 					}}>
-					{cardBlock('card-group-1')}
-					{cardBlock('card-group-2')}
-					{cardBlock('card-group-3')}
+					<div
+						style={{
+							width: cardSize.w,
+							position: 'relative',
+							borderRadius: computeSize(44),
+							height: cardSize.h,
+							overflow: 'hidden',
+						}}>
+						{cardBlock(downloading ? '' : 'card-group-1')}
+						{!downloading && cardBlock('card-group-2')}
+						{!downloading && cardBlock('card-group-3')}
 
-					{!downloading && (
-						<div
-							style={{
-								borderRadius: computeSize(44),
-								width: cardSize.w,
-								height: cardSize.h,
-							}}
-							className={`effect ${texture === 'none' ? '' : texture}`}
-						/>
-					)}
+						{!downloading && (
+							<div
+								style={{
+									borderRadius: computeSize(44),
+									width: cardSize.w,
+									height: cardSize.h,
+								}}
+								className={`effect ${texture === 'none' ? '' : texture}`}
+							/>
+						)}
+					</div>
 				</div>
 			</CardBody>
 		</Card>
