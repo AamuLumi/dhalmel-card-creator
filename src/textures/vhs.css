@@ -193,11 +193,11 @@
     }
 }
 
-
-
 /* Unused part of the file */
 
 /* This effect is cool but use too much CPU/GPU */
+
+/*
 @keyframes vhs-texture-effect {
     0% {
         transform: translate(0, 0);
@@ -235,5 +235,5 @@
     margin-left: 1vh;
     filter: brightness(150%) contrast(2) hue-rotate(20deg);
     animation: shake-glitch--2 1.4s ease-in-out infinite;
-}
+} */
 
