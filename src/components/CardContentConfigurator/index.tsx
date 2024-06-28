@@ -135,7 +135,9 @@ export default function CardContentConfigurator(_: any) {
 					label="Type"
 					onValueChange={CardBuilder.Setters.setType}
 					value={type}>
-					{Constants.Types.map((type) => (
+					{Constants.Types.sort((a, b) =>
+						getTypeName(a as DCC.Type).localeCompare(getTypeName(b as DCC.Type)),
+					).map((type) => (
 						<RadioListItem key={type} value={type}>
 							{getTypeName(type as DCC.Type)}
 						</RadioListItem>

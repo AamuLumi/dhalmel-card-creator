@@ -1,4 +1,5 @@
 const TYPES = [
+	'class',
 	'creature',
 	'item',
 	'land',
