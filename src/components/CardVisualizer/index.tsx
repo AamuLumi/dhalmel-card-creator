@@ -247,9 +247,7 @@ export default forwardRef(function CardVisualizer(_, ref) {
 	}, []);
 
 	const transformedDescription =
-		template === 'cursed' || template === 'eorzean'
-			? zalgoRandomGeneration(description, 3)
-			: description;
+		template === 'cursed' ? zalgoRandomGeneration(description, 3) : description;
 
 	const cardBlock = (className: string = '') => (
 		<div

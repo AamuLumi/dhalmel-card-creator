@@ -40,6 +40,8 @@ export const getRarityName = (t: DCC.Rarity) => {
 
 export const getTypeName = (t: DCC.Type) => {
 	switch (t) {
+		case 'class':
+			return 'Classe';
 		case 'action':
 			return 'Action';
 		case 'human':

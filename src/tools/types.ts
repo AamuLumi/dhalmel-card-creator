@@ -14,6 +14,7 @@ export namespace DCC {
 		| 'primordial'
 		| 'scion'
 		| 'ascian'
+		| 'class'
 		| 'mount';
 
 	export type ArtFile = {
